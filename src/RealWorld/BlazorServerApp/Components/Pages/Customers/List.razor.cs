@@ -12,14 +12,8 @@ public partial class List
     //    this.Repository = Repository;
     //}
 
-    [Inject]
-    private ICustomerRepository Repository {  get; set; }
+   
 
-    private IEnumerable<Customer> Customers { get; set; }
-
-    protected override void OnInitialized()
-    {
-        Customers = Repository.GetAll();
-    }
+    
 
 }
