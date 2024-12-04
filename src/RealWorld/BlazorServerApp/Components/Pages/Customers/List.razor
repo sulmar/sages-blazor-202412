@@ -1,7 +1,4 @@
 ﻿@page "/customers"
-@using Domain.Abstractions
-@using Domain.Models
-@inject ICustomerRepository Repository
 
 <h3>Customers</h3>
 
@@ -35,14 +32,3 @@
 </table>
 
 
-
-@code {
-
-    private IEnumerable<Customer> Customers { get; set; }
-
-    protected override void OnInitialized()
-    {
-        Customers = Repository.GetAll();
-    }
-
-}
