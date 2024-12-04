@@ -3,7 +3,19 @@
 
 <h3>Customers</h3>
 
-<CustomerTableTemplate Customers="@Customers" />
+<TableTemplate Items="@Customers">
+    <HeaderTemplate>
+        <th>Id</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+    </HeaderTemplate>
+
+    <RowTemplate>
+        <td>#@context.Id</td>
+        <td>@context.FirstName</td>
+        <td>@context.LastName</td>
+    </RowTemplate>
+</TableTemplate>
 
 
 @code {
