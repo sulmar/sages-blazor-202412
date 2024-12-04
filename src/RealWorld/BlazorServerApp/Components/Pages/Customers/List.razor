@@ -4,12 +4,8 @@
 
 <h3>Customers</h3>
 
-@if (Customers is null)
-{
-    <p>Loading customers...</p>
-}
-else
-{
+<Loader IsLoading="@IsLoading">
+
     <TableTemplate Items="@Customers" Context="customer">
         <HeaderTemplate>
             <th>Id</th>
@@ -23,16 +19,25 @@ else
             <td>@customer.LastName</td>
         </RowTemplate>
     </TableTemplate>
-}
+
+</Loader>
+
+
 
 @code {
 
     private IEnumerable<Customer> Customers { get; set; }
 
+    private bool IsLoading { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
+        IsLoading = true;
+
         await Task.Delay(3000);
 
         Customers = await Repository.GetAllAsync();
+
+        IsLoading = false;
     }
 }

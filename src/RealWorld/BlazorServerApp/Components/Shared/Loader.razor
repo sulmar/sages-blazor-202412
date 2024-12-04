@@ -1,0 +1,34 @@
+﻿@if (IsLoading)
+{
+    @if (Placeholder is not null)
+    {
+        @Placeholder
+    }
+    else
+    {
+
+        <div class="loader">
+            <p>Loading...</p>
+
+            <div class="spinner"></div>
+        </div>
+    
+    }
+}
+else
+{
+    @ChildContent
+}
+
+@code {
+
+    [Parameter, EditorRequired]
+    public bool IsLoading { get; set; }
+   
+    [Parameter]
+    public RenderFragment? Placeholder { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+}
