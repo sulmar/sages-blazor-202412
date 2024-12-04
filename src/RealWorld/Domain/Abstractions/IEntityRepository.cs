@@ -7,5 +7,6 @@ public interface IEntityRepository<T>
     where T : BaseEntity
 {
     IEnumerable<T> GetAll();
+    Task<IEnumerable<T>> GetAllAsync();
 }
 

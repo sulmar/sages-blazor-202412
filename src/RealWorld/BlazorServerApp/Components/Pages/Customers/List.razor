@@ -1,29 +1,38 @@
 ﻿@page "/customers"
 @inject ICustomerRepository Repository
 
+
 <h3>Customers</h3>
 
-<TableTemplate Items="@Customers" Context="customer">
-    <HeaderTemplate>
-        <th>Id</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-    </HeaderTemplate>
+@if (Customers is null)
+{
+    <p>Loading customers...</p>
+}
+else
+{
+    <TableTemplate Items="@Customers" Context="customer">
+        <HeaderTemplate>
+            <th>Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+        </HeaderTemplate>
 
-    <RowTemplate>
-        <td>#@customer.Id</td>
-        <td>@customer.FirstName</td>
-        <td>@customer.LastName</td>
-    </RowTemplate>
-</TableTemplate>
-
+        <RowTemplate>
+            <td>#@customer.Id</td>
+            <td>@customer.FirstName</td>
+            <td>@customer.LastName</td>
+        </RowTemplate>
+    </TableTemplate>
+}
 
 @code {
 
     private IEnumerable<Customer> Customers { get; set; }
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        Customers = Repository.GetAll();
+        await Task.Delay(3000);
+
+        Customers = await Repository.GetAllAsync();
     }
 }

@@ -18,12 +18,24 @@ public class FakeCustomerRepository : ICustomerRepository
     {
         return _customers.Values.ToList();
     }
+
+    public Task<IEnumerable<Customer>> GetAllAsync()
+    {
+        var customers = GetAll();
+
+        return Task.FromResult(customers);
+    }
 }
 
 
 public class DbCustomerRepository : ICustomerRepository
 {
     public IEnumerable<Customer> GetAll()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<IEnumerable<Customer>> GetAllAsync()
     {
         throw new NotImplementedException();
     }
