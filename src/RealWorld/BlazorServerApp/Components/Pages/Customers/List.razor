@@ -5,10 +5,10 @@
 
 <h3>Customers</h3>
 
-<ul>
+<ul class="list-group">
     @foreach (var customer in Customers)
     {
-        <li>Customer #@customer.Id @customer.FirstName @customer.LastName</li>
+        <li class="list-group-item">Customer #@customer.Id @customer.FirstName @customer.LastName</li>
     }
 </ul>
 
