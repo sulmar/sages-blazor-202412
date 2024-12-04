@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace Domain.Abstractions;
 
-public interface ICustomerRepository
+public interface ICustomerRepository : IEntityRepository<Customer>
 {
-    IEnumerable<Customer> GetAll();
+    
 }
+
