@@ -5,12 +5,36 @@
 
 <h3>Customers</h3>
 
-<ul class="list-group">
-    @foreach (var customer in Customers)
-    {
-        <li class="list-group-item">Customer #@customer.Id @customer.FirstName @customer.LastName</li>
-    }
-</ul>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+        @foreach (var customer in Customers)
+        {
+            <tr>
+                <td>#@customer.Id</td>
+                <td>@customer.FirstName</td>
+                <td>@customer.LastName</td>
+            </tr>
+        }
+
+    </tbody>
+
+    <tfoot>
+        <tr>
+            Quantity: @Customers.Count()
+        </tr>
+    </tfoot>
+</table>
+
+
 
 @code {
 
