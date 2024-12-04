@@ -4,11 +4,15 @@
 
 <h3>Customers</h3>
 
+
 <div>
     <label for="searchText">Search: </label>
-    <input id="searchText" type="text" @bind="@searchText" />
+    <input id="searchText" type="text" @bind="@searchText" @bind:after="@Search" @bind:event="oninput"  />
 
     <button type="button" class="btn btn-primary" @onclick="Search">Search</button>
+
+    @searchText
+
 </div>
 
 <Loader IsLoading="@IsLoading">
