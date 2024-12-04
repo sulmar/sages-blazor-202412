@@ -4,16 +4,8 @@
 
 <h3>Customers</h3>
 
-
-<div>
-    <label for="searchText">Search: </label>
-    <input id="searchText" type="text" @bind="@searchText" @bind:after="@Search" @bind:event="oninput"  />
-
-    <button type="button" class="btn btn-primary" @onclick="Search">Search</button>
-
-    @searchText
-
-</div>
+<SearchPanel OnSearch="@( (searchText) => Console.WriteLine(searchText) )"
+             OnClear="@( () => Console.WriteLine("Cleared!") )" />
 
 <Loader IsLoading="@IsLoading">
 
@@ -41,7 +33,7 @@
 
     private bool IsLoading { get; set; }
 
-    private string searchText;
+
 
     protected override async Task OnInitializedAsync()
     {
@@ -54,8 +46,14 @@
         IsLoading = false;
     }
 
-    private async Task Search()
+    private async Task Search(string searchText)
     {
         Customers = await Repository.GetBySearchTextAsync(searchText);
+
+    }
+
+    private async Task Clear()
+    {
+        Customers = new List<Customer>();
     }
 }
