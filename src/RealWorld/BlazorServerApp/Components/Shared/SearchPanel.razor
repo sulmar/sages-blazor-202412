@@ -1,0 +1,35 @@
+﻿<div>
+    <label for="searchText">Search: </label>
+    <input id="searchText" type="text" @bind="@searchText" @bind:event="oninput" @bind:after="@Search" />
+
+    <button type="button" class="btn btn-primary" @onclick="Search">Search</button>
+
+    <button type="button" class="btn btn-danger" @onclick="Clear">Clear</button>
+
+    @searchText
+
+</div>
+
+
+@code {
+
+    private string searchText;
+
+    [Parameter]
+    public EventCallback<string> OnSearch { get; set; }
+
+    [Parameter]
+    public EventCallback OnClear { get; set; }
+
+    private async Task Search()
+    {
+        await OnSearch.InvokeAsync(searchText);
+    }
+
+    private async Task Clear()
+    {
+        await OnClear.InvokeAsync();
+    }
+
+
+}

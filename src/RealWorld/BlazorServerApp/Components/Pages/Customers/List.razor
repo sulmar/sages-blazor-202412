@@ -4,7 +4,7 @@
 
 <h3>Customers</h3>
 
-<SearchPanel OnSearch="@( (searchText) => Console.WriteLine(searchText) )"
+<SearchPanel OnSearch="@Search"
              OnClear="@( () => Console.WriteLine("Cleared!") )" />
 
 <Loader IsLoading="@IsLoading">
