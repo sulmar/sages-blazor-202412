@@ -54,8 +54,8 @@
         IsLoading = false;
     }
 
-    private void Search()
+    private async Task Search()
     {
-        Console.WriteLine(searchText);
+        Customers = await Repository.GetBySearchTextAsync(searchText);
     }
 }

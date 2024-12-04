@@ -9,7 +9,7 @@ public class FakeCustomerRepository : ICustomerRepository
 
     public FakeCustomerRepository(IEnumerable<Customer> customers)
     {
-       
+
 
         _customers = customers.ToDictionary(p => p.Id);
     }
@@ -25,6 +25,18 @@ public class FakeCustomerRepository : ICustomerRepository
 
         return Task.FromResult(customers);
     }
+
+    public Task<IEnumerable<Customer>> GetBySearchTextAsync(string searchText)
+    {
+        return Task.FromResult(GetBySearchText(searchText));
+    }
+
+    private IEnumerable<Customer> GetBySearchText(string searchText)
+    {
+        return _customers
+            .Select(c => c.Value)
+            .Where(c => c.FirstName.Contains(searchText) || c.LastName.Contains(searchText));
+    }
 }
 
 
@@ -36,6 +48,11 @@ public class DbCustomerRepository : ICustomerRepository
     }
 
     public Task<IEnumerable<Customer>> GetAllAsync()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<IEnumerable<Customer>> GetBySearchTextAsync(string searchText)
     {
         throw new NotImplementedException();
     }
