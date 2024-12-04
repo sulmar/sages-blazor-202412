@@ -4,6 +4,13 @@
 
 <h3>Customers</h3>
 
+<div>
+    <label for="searchText">Search: </label>
+    <input id="searchText" type="text" @bind-value="@searchText" />
+
+    <button type="button" class="btn btn-primary" @onclick="Search">Search</button>
+</div>
+
 <Loader IsLoading="@IsLoading">
 
     <TableTemplate Items="@Customers" Context="customer">
@@ -30,6 +37,8 @@
 
     private bool IsLoading { get; set; }
 
+    private string searchText;
+
     protected override async Task OnInitializedAsync()
     {
         IsLoading = true;
@@ -39,5 +48,10 @@
         Customers = await Repository.GetAllAsync();
 
         IsLoading = false;
+    }
+
+    private void Search()
+    {
+        Console.WriteLine(searchText);
     }
 }
