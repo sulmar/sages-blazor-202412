@@ -21,6 +21,7 @@ builder.Services.AddTransient<IEnumerable<Customer>>(sp =>
         ]);
 
 builder.Services.AddSingleton<CounterContext>();
+builder.Services.AddSingleton<ApplicationState>();
 
 var app = builder.Build();
 
