@@ -5,7 +5,7 @@
 
 <h3>Counter</h3>
 
-<p>Current count: @CounterContext.CurrentCount</p>
+<p>Current count: @CounterContext.Instance.CurrentCount</p>
 
 <button @onclick="@IncrementCount">Increment</button>
 
@@ -16,7 +16,7 @@
 
     private void IncrementCount()
     {
-        CounterContext.CurrentCount++;
+        CounterContext.Instance.CurrentCount++;
     }
 
 }

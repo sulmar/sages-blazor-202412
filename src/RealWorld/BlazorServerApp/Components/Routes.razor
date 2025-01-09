@@ -1,15 +1,10 @@
 ﻿@using BlazorServerApp.Models
 
-<CascadingValue Value="@CounterContext">
-    <Router AppAssembly="typeof(Program).Assembly">
-        <Found Context="routeData">
-            <RouteView RouteData="routeData" DefaultLayout="typeof(Layout.SimpleLayout)" />
-            <FocusOnNavigate RouteData="routeData" Selector="h1" />
-        </Found>
-    </Router>
-</CascadingValue>
+<Router AppAssembly="typeof(Program).Assembly">
+    <Found Context="routeData">
+        <RouteView RouteData="routeData" DefaultLayout="typeof(Layout.SimpleLayout)" />
+        <FocusOnNavigate RouteData="routeData" Selector="h1" />
+    </Found>
+</Router>
 
 
-@code {
-    private CounterContext CounterContext = new CounterContext();
-}
