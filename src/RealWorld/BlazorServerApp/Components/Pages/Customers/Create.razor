@@ -1,10 +1,11 @@
 ﻿@page "/customers/create"
+@using Blazored.FluentValidation
 
 <h3>Create</h3>
 
 <EditForm Model="@Customer" OnValidSubmit="OnValidSubmit" FormName="customerForm">
 
-    <DataAnnotationsValidator />
+    <FluentValidationValidator />
 
     <ValidationSummary />
 
