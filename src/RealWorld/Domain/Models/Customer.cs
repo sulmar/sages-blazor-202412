@@ -14,7 +14,11 @@ public class Customer : BaseEntity
 
     [Compare("ConfirmPassword")]
     public string Password { get; set; }
+    [Compare("Password")]
     public string ConfirmPassword { get; set; }
 
     public string Pesel { get; set; }
+
+    [RegularExpression(@"^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$")]
+    public string Email { get; set; }
 }

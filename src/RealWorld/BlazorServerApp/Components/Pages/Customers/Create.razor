@@ -16,6 +16,10 @@
     <InputText id="lastname" @bind-Value=@Customer.LastName />
     <ValidationMessage For="()=>Customer.LastName" />
 
+    <label for="email">Email</label>
+    <InputText id="email" @bind-Value=@Customer.Email />
+    <ValidationMessage For="()=>Customer.Email" />
+
     <label for="note">Note</label>
     <InputTextArea id="note" @bind-Value=@Customer.Note />
     <ValidationMessage For="()=>Customer.Note" />
