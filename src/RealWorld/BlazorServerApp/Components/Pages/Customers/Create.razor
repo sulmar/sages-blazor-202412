@@ -2,26 +2,34 @@
 
 <h3>Create</h3>
 
-<form method="post">
+<EditForm Model="@Customer" OnValidSubmit="OnValidSubmit" FormName="customerForm">
+
+    <DataAnnotationsValidator />
+
+    <ValidationSummary />
 
     <label for="firstname">First name</label>
-    <input id="firstname" name="firstname" />
+    <InputText id="firstname" @bind-Value=@Customer.FirstName />
+    <ValidationMessage For="()=>Customer.FirstName" />
 
-    <label for="lastname">Last name</label>
-    <input id="lastname" name="lastname" />
+    <label for="lastname">Last name</label>    
+    <InputText id="lastname" @bind-Value=@Customer.LastName />
+    <ValidationMessage For="()=>Customer.LastName" />
+
+    <label for="note">Note</label>
+    <InputTextArea id="note" @bind-Value=@Customer.Note />
+    <ValidationMessage For="()=>Customer.Note" />
 
     <button type="submit">Submit</button>
-</form>
+</EditForm>
 
 
 @code {
+    private Customer Customer { get; set; } = new Customer();
 
-    [SupplyParameterFromForm]
-    private Customer Customer { get; set; }
-
-    protected override void OnInitialized()
+    private async Task OnValidSubmit()
     {
-        Customer = new Customer();
+
     }
 
 }
