@@ -23,7 +23,7 @@
     {
         CounterContext.CurrentCount++;
 
-        await LocalStorage.SetItemAsync("counter", CounterContext.CurrentCount.ToString());
+        await LocalStorage.SetItemAsync("counter", CounterContext.CurrentCount);
     }
 
 }
