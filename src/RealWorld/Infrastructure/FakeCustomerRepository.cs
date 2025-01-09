@@ -26,6 +26,18 @@ public class FakeCustomerRepository : ICustomerRepository
         return Task.FromResult(customers);
     }
 
+    public Task<Customer> GetById(int id)
+    {
+        if (_customers.TryGetValue(id, out var result))
+        {
+            return Task.FromResult(result);
+        }
+        else
+        {
+            return Task.FromResult<Customer>(null);
+        }
+    }
+
     public Task<IEnumerable<Customer>> GetBySearchTextAsync(string searchText)
     {
         return Task.FromResult(GetBySearchText(searchText));
@@ -48,6 +60,11 @@ public class DbCustomerRepository : ICustomerRepository
     }
 
     public Task<IEnumerable<Customer>> GetAllAsync()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Customer> GetById(int id)
     {
         throw new NotImplementedException();
     }
