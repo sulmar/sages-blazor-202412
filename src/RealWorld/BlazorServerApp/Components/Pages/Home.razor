@@ -7,6 +7,8 @@
 
 Welcome to your new app.
 
+Current Count: @CounterContext.CurrentCount
+
 <PriceContext Price="@price" Changed="@OnPriceChanged" ActionContext="ActionContext">
     <CascadingValue Value="@happyNumber">
         <CascadingValue Value="@description" Name="Description">
@@ -28,6 +30,11 @@ Welcome to your new app.
     private string description = "Lorem ipsum";
 
     private Price price = new Price { Amount = 100, CurrencyCode = "PLN" };
+
+    [CascadingParameter]
+    public CounterContext CounterContext { get; set; }
+
+    
 
 
     private ActionContext ActionContext = new ActionContext();
