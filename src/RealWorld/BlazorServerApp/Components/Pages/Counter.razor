@@ -1,7 +1,8 @@
 ﻿@page "/counter"
 @using BlazorServerApp.Models
 @using BlazorServerApp.Services
-@inject LocalStorage LocalStorage
+@using Blazored.LocalStorage
+@inject ILocalStorageService LocalStorage
 
 <PageTitle>Counter</PageTitle>
 
@@ -22,7 +23,7 @@
     {
         CounterContext.CurrentCount++;
 
-        await LocalStorage.SetItem("counter", CounterContext.CurrentCount.ToString());
+        await LocalStorage.SetItemAsync("counter", CounterContext.CurrentCount.ToString());
     }
 
 }
