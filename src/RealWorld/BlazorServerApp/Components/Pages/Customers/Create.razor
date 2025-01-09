@@ -1,0 +1,27 @@
+﻿@page "/customers/create"
+
+<h3>Create</h3>
+
+<form method="post">
+
+    <label for="firstname">First name</label>
+    <input id="firstname" name="firstname" />
+
+    <label for="lastname">Last name</label>
+    <input id="lastname" name="lastname" />
+
+    <button type="submit">Submit</button>
+</form>
+
+
+@code {
+
+    [SupplyParameterFromForm]
+    private Customer Customer { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Customer = new Customer();
+    }
+
+}

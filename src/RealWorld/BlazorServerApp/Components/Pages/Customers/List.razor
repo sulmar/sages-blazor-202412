@@ -7,6 +7,9 @@
 <SearchPanel OnSearch="@Search"
 OnClear="@( () => Console.WriteLine("Cleared!") )" />
 
+
+<a href="/customers/create" class="btn btn-primary">Add</a>
+
 <Loader @bind-IsLoading="@IsLoading" @bind-IsLoading:after="@OnLoaded" >
 
     <TableTemplate Items="@Customers" Context="customer">
