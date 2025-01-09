@@ -1,5 +1,6 @@
 ﻿@page "/"
 @using BlazorServerApp.Models
+@inject CounterContext CounterContext
 
 <PageTitle>Home</PageTitle>
 
@@ -7,7 +8,7 @@
 
 Welcome to your new app.
 
-Current Count: @CounterContext.Instance.CurrentCount
+Current Count: @CounterContext.CurrentCount
 
 <PriceContext Price="@price" Changed="@OnPriceChanged" ActionContext="ActionContext">
     <CascadingValue Value="@happyNumber">

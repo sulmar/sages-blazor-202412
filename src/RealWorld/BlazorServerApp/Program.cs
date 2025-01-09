@@ -1,4 +1,5 @@
 using BlazorServerApp.Components;
+using BlazorServerApp.Models;
 using Domain.Abstractions;
 using Domain.Models;
 using Infrastructure;
@@ -19,6 +20,7 @@ builder.Services.AddTransient<IEnumerable<Customer>>(sp =>
             new Customer { Id  = 5, FirstName = "Adam", LastName = "Smith" },
         ]);
 
+builder.Services.AddSingleton<CounterContext>();
 
 var app = builder.Build();
 

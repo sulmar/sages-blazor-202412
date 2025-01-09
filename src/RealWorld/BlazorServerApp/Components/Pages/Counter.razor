@@ -1,22 +1,23 @@
 ﻿@page "/counter"
 @using BlazorServerApp.Models
 
+
 <PageTitle>Counter</PageTitle>
 
 <h3>Counter</h3>
 
-<p>Current count: @CounterContext.Instance.CurrentCount</p>
+<p>Current count: @CounterContext.CurrentCount</p>
 
 <button @onclick="@IncrementCount">Increment</button>
 
 @code {
 
-    [CascadingParameter]
+    [Inject]
     public CounterContext CounterContext { get; set; }
 
     private void IncrementCount()
     {
-        CounterContext.Instance.CurrentCount++;
+        CounterContext.CurrentCount++;
     }
 
 }
