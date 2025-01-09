@@ -11,4 +11,10 @@ public class Customer : BaseEntity
     [Required, MaxLength(10), MinLength(3)]
     public string LastName { get; set; }
     public string Note { get; set; }
+
+    [Compare("ConfirmPassword")]
+    public string Password { get; set; }
+    public string ConfirmPassword { get; set; }
+
+    public string Pesel { get; set; }
 }
