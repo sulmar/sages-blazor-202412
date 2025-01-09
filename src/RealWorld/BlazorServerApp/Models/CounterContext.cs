@@ -4,6 +4,8 @@ public class CounterContext
 {
     public int CurrentCount { get; set; } = 5;
 
+    private static object _syncLock = new object();
+
 
     // Wzorzec projektowy Singleton
     private static CounterContext _instance;
@@ -11,10 +13,13 @@ public class CounterContext
     {
         get
         {
-            if (_instance == null)
-                _instance = new CounterContext();
+            lock (_syncLock)
+            {
+                if (_instance == null)
+                    _instance = new CounterContext();
 
-            return _instance;
+                return _instance;
+            }
 
         }
     }
