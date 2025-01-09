@@ -1,4 +1,5 @@
 ﻿@using BlazorServerApp.Models
+@using BlazorServerApp.Services
 
 <Router AppAssembly="typeof(Program).Assembly">
     <Found Context="routeData">
@@ -8,3 +9,25 @@
 </Router>
 
 
+@code {
+
+
+    [Inject]
+    public CounterContext CounterContext { get; set; }
+
+    [Inject]
+    public LocalStorage LocalStorage { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            string counter = await LocalStorage.GetItem("counter");
+
+            CounterContext.CurrentCount = int.Parse(counter);
+
+            StateHasChanged();
+        }
+    }
+
+}

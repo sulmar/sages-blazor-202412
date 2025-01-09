@@ -1,5 +1,6 @@
 using BlazorServerApp.Components;
 using BlazorServerApp.Models;
+using BlazorServerApp.Services;
 using Domain.Abstractions;
 using Domain.Models;
 using Infrastructure;
@@ -22,6 +23,7 @@ builder.Services.AddTransient<IEnumerable<Customer>>(sp =>
 
 builder.Services.AddSingleton<CounterContext>();
 builder.Services.AddSingleton<ApplicationState>();
+builder.Services.AddTransient<LocalStorage>();
 
 var app = builder.Build();
 

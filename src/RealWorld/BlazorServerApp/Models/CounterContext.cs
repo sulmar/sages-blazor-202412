@@ -2,5 +2,5 @@
 
 public class CounterContext
 {
-    public int CurrentCount { get; set; } = 5; 
+    public int CurrentCount { get; set; }
 }

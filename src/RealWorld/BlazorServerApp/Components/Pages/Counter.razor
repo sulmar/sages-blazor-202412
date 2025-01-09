@@ -1,6 +1,7 @@
 ﻿@page "/counter"
 @using BlazorServerApp.Models
-@inject IJSRuntime JS
+@using BlazorServerApp.Services
+@inject LocalStorage LocalStorage
 
 <PageTitle>Counter</PageTitle>
 
@@ -15,18 +16,13 @@
     [Inject]
     public CounterContext CounterContext { get; set; }
 
-    protected override async Task OnInitializedAsync()
-    {
-        string counter = await JS.InvokeAsync<string>("localStorage.getItem", "counter");
 
-        CounterContext.CurrentCount = int.Parse(counter);
-    }
 
     private async Task IncrementCount()
     {
         CounterContext.CurrentCount++;
 
-        await JS.InvokeVoidAsync("localStorage.setItem", "counter", CounterContext.CurrentCount);
+        await LocalStorage.SetItem("counter", CounterContext.CurrentCount.ToString());
     }
 
 }
