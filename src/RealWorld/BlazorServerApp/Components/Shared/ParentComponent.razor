@@ -1,0 +1,18 @@
+﻿@using BlazorServerApp.Models
+<h3>ParentComponent</h3>
+
+<ChildComponent />
+
+<PriceComponent />
+
+@code {
+
+    [CascadingParameter]
+    public ActionContext ActionContext { get; set; }
+
+    protected override void OnInitialized()
+    {
+        ActionContext.ChangedAction += () => Console.WriteLine("ChangedPriceAction Parent");
+    }
+}
+

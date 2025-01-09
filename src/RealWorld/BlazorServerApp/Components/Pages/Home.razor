@@ -1,7 +1,49 @@
 ﻿@page "/"
+@using BlazorServerApp.Models
 
 <PageTitle>Home</PageTitle>
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
+
+<PriceContext Price="@price" Changed="@OnPriceChanged" ActionContext="ActionContext">
+    <CascadingValue Value="@happyNumber">
+        <CascadingValue Value="@description" Name="Description">
+            <CascadingValue Value="@msg" Name="Message">
+                <ParentComponent />
+            </CascadingValue>
+        </CascadingValue>
+    </CascadingValue>
+</PriceContext>
+
+
+
+
+@code {
+    private string msg = "Hello World";
+
+    private int happyNumber = 7;
+
+    private string description = "Lorem ipsum";
+
+    private Price price = new Price { Amount = 100, CurrencyCode = "PLN" };
+
+
+    private ActionContext ActionContext = new ActionContext();
+
+    protected override void OnInitialized()
+    {
+        ActionContext.ChangedAction += OnPriceActionChanged;
+    }
+
+    public void OnPriceChanged()
+    {
+        Console.WriteLine("PriceChanged");
+    }
+
+    public void OnPriceActionChanged()
+    {
+        Console.WriteLine("PriceActionChanged");
+    }
+}

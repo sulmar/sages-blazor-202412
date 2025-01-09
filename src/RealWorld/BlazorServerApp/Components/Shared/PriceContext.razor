@@ -1,0 +1,30 @@
+﻿@using BlazorServerApp.Models
+
+<CascadingValue Value="@ActionContext">
+
+    <CascadingValue Value="@Changed">
+
+        <CascadingValue Value="@Price">
+            @ChildContent
+        </CascadingValue>
+
+    </CascadingValue>
+
+</CascadingValue>
+
+@code {
+
+    [Parameter]
+    public Price Price { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set;  }
+
+    [Parameter]
+    public EventCallback Changed { get; set; }
+
+    [Parameter]
+    public ActionContext ActionContext { get; set; }
+    
+
+}

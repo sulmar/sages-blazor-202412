@@ -1,0 +1,27 @@
+﻿@using BlazorServerApp.Models
+<h3>PriceComponent</h3>
+
+Amount: @Price.Amount 
+CurrencyCode: @Price.CurrencyCode
+
+<button type="button" @onclick=@OnChangedPrice>Fire Changed Price</button>
+
+@code {
+
+    [CascadingParameter]
+    public Price Price { get; set; }
+
+    [CascadingParameter]
+    public EventCallback ChangedPrice { get; set; }
+
+    public async Task OnChangedPrice()
+    {
+        await ChangedPrice.InvokeAsync();
+        
+        ActionContext.ChangedAction.Invoke();
+    }
+
+    [CascadingParameter]
+    public ActionContext ActionContext { get; set; }
+
+}
