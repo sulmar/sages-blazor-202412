@@ -1,4 +1,6 @@
-﻿<h3>List</h3>
+﻿@page "/products"
+
+<h3>List</h3>
 
 <TableTemplate Items="@Products" Context="product">
     <HeaderTemplate>
@@ -18,7 +20,6 @@
 </TableTemplate>
 
 @code {
-
-    private IEnumerable<Product> Products { get; set; }
+    private IEnumerable<Product> Products { get; set; } = new List<Product>();
 
 }
