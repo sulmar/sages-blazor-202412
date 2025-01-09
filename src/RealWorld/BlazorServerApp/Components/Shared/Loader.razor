@@ -12,7 +12,7 @@
 
             <div class="spinner-border"></div>
         </div>
-    
+
     }
 }
 else
@@ -22,9 +22,31 @@ else
 
 @code {
 
+    private bool _isLoading;
+
     [Parameter, EditorRequired]
-    public bool IsLoading { get; set; }
-   
+    public bool IsLoading
+    {
+        get => _isLoading;
+        set
+        {
+            if (_isLoading != value)
+            {
+                _isLoading = value;
+
+                UpdateLoadingChanged();
+            }
+        }
+    }
+
+    async Task UpdateLoadingChanged()
+    {
+        await IsLoadingChanged.InvokeAsync();
+    }
+
+    [Parameter]
+    public EventCallback<bool> IsLoadingChanged { get; set; }
+
     [Parameter]
     public RenderFragment? Placeholder { get; set; }
 

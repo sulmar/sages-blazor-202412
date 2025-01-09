@@ -5,9 +5,9 @@
 <h3>Customers</h3>
 
 <SearchPanel OnSearch="@Search"
-             OnClear="@( () => Console.WriteLine("Cleared!") )" />
+OnClear="@( () => Console.WriteLine("Cleared!") )" />
 
-<Loader IsLoading="@IsLoading">
+<Loader @bind-IsLoading="@IsLoading" @bind-IsLoading:after="@OnLoaded" >
 
     <TableTemplate Items="@Customers" Context="customer">
         <HeaderTemplate>
@@ -35,6 +35,11 @@
 
     private bool IsLoading { get; set; }
 
+    private Task OnLoaded()
+    {
+        Console.WriteLine("OnLoaded");
+        return Task.CompletedTask;
+    }
 
 
     protected override async Task OnInitializedAsync()
