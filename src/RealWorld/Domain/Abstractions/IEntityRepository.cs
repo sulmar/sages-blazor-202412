@@ -9,5 +9,6 @@ public interface IEntityRepository<T>
     IEnumerable<T> GetAll();
     Task<IEnumerable<T>> GetAllAsync();
     Task<T> GetById(int id);
+    Task Add(T entity);
 }
 

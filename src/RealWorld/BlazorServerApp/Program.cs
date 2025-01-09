@@ -12,8 +12,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddTransient<ICustomerRepository, FakeCustomerRepository>();
-builder.Services.AddTransient<IEnumerable<Customer>>(sp =>
+builder.Services.AddSingleton<ICustomerRepository, FakeCustomerRepository>();
+builder.Services.AddSingleton<IEnumerable<Customer>>(sp =>
         [
             new Customer { Id  = 1, FirstName = "John", LastName = "Smith" },
             new Customer { Id  = 2, FirstName = "Kate", LastName = "Smith" },

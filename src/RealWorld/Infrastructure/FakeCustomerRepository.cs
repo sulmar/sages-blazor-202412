@@ -14,6 +14,17 @@ public class FakeCustomerRepository : ICustomerRepository
         _customers = customers.ToDictionary(p => p.Id);
     }
 
+    public Task Add(Customer entity)
+    {
+        int id = _customers.Values.Max(p => p.Id);
+
+        entity.Id = ++id;
+
+       _customers.Add(entity.Id, entity);
+
+        return Task.CompletedTask;
+    }
+
     public IEnumerable<Customer> GetAll()
     {
         return _customers.Values.ToList();
@@ -48,29 +59,5 @@ public class FakeCustomerRepository : ICustomerRepository
         return _customers
             .Select(c => c.Value)
             .Where(c => c.FirstName.Contains(searchText) || c.LastName.Contains(searchText));
-    }
-}
-
-
-public class DbCustomerRepository : ICustomerRepository
-{
-    public IEnumerable<Customer> GetAll()
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<IEnumerable<Customer>> GetAllAsync()
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<Customer> GetById(int id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<IEnumerable<Customer>> GetBySearchTextAsync(string searchText)
-    {
-        throw new NotImplementedException();
     }
 }

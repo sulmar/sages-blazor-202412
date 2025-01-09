@@ -1,5 +1,7 @@
 ﻿@page "/customers/create"
 @using Blazored.FluentValidation
+@inject ICustomerRepository Repository
+@inject NavigationManager NavigationManager
 
 <h3>Create</h3>
 
@@ -34,7 +36,9 @@
 
     private async Task OnValidSubmit()
     {
+        await Repository.Add(Customer);
 
+        NavigationManager.NavigateTo("/customers");
     }
 
 }
