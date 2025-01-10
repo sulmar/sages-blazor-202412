@@ -32,3 +32,32 @@ h1:focus {
 h3 {
     color: blue;
 }
+
+
+
+.tile {
+    width: 150px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.total-sales {
+    background-color: green;
+}
+
+.new-users {
+    background-color: blue;
+}
+
+.active-sessions {
+    background-color: orange;
+}

@@ -1,0 +1,24 @@
+﻿@page "/dashboard"
+
+<h3>Dashboard</h3>
+
+<div class="dashboard">
+    <DashboardItem Title="Total Sales" Value="@context.TotalSales" CssName="total-sales" />
+    <DashboardItem Title="New Users" Value="@context.NewUsers" CssName="new-users" />
+    <DashboardItem Title="Active Sessions" Value="@context.ActiveSessions" CssName="active-sessions" />
+</div>
+
+@code {
+    private DashboardContext context;
+
+    protected override void OnInitialized()
+    {
+        context = new DashboardContext
+        {
+            TotalSales = Random.Shared.Next(1, 100000),
+            NewUsers = Random.Shared.Next(10, 20),
+            ActiveSessions = Random.Shared.Next(10, 50)
+        };
+    }
+
+}

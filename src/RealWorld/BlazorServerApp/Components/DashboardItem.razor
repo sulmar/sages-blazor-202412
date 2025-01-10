@@ -1,0 +1,19 @@
+﻿
+<div class="tile @CssName">
+    <p class="title">@Title</p>
+    <span>@Value</span>
+</div>
+
+
+@code {
+
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public int Value { get; set; }
+
+    [Parameter]
+    public string CssName { get; set; }
+
+}
