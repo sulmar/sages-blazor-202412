@@ -1,7 +1,9 @@
 ﻿@page "/customers"
 @using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
 
 @inject ICustomerRepository Repository
+@inject AuthenticationStateProvider authStateProvider
 @attribute [Authorize]
 
 
@@ -50,6 +52,14 @@ OnClear="@( () => Console.WriteLine("Cleared!") )" />
 
     protected override async Task OnInitializedAsync()
     {
+        var authState = await authStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.IsInRole("developer"))
+        {
+
+        }
+
         IsLoading = true;
 
         await Task.Delay(3000);
