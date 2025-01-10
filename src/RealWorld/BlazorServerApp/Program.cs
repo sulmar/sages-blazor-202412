@@ -9,6 +9,8 @@ using BlazorServerApp.Hubs;
 using BlazorServerApp.BackroundServices;
 using System.Security.Principal;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,6 +35,49 @@ builder.Services.AddBlazoredLocalStorage();
 
 builder.Services.AddHostedService<DashboardContextBackroundService>();
 
+string privateKey = "your_secret_key_your_secret_key_your_secret_key";
+var securityKey = new SymmetricSecurityKey(System.Text.Encoding.Default.GetBytes(privateKey));
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+    .AddCookie()
+    .AddJwtBearer(x =>
+    {
+        x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+        {
+            ValidIssuer = "MyIssuer",
+            ValidateIssuer = true,
+
+            ValidAudience = "MyAudience",
+            ValidateAudience = true,
+
+            IssuerSigningKey = securityKey,
+
+        };
+
+        x.Events = new()
+        {
+            OnMessageReceived = context =>
+            {
+                var cookies = context.HttpContext.Request.Cookies;
+
+                if (cookies.TryGetValue("access-token", out var access_token))
+                {
+                    context.Token = access_token;
+                };
+
+                return Task.CompletedTask;
+            }
+        };
+
+    });
+
+builder.Services.AddAuthorization();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -51,7 +96,7 @@ app.UseAntiforgery();
 app.UseAuthentication();
 app.UseAuthorization();
 
-ClaimsPrincipal
+
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
