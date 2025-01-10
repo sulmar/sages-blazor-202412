@@ -4,7 +4,9 @@ using BlazorServerApp.Services;
 using Domain.Abstractions;
 using Domain.Models;
 using Infrastructure;
-using Blazored.LocalStorage; 
+using Blazored.LocalStorage;
+using BlazorServerApp.Hubs;
+using BlazorServerApp.BackroundServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +28,9 @@ builder.Services.AddSingleton<CounterContext>();
 builder.Services.AddSingleton<ApplicationState>();
 builder.Services.AddBlazoredLocalStorage();
 
+
+builder.Services.AddHostedService<DashboardContextBackroundService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -43,5 +48,7 @@ app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
+
+app.MapHub<DashboardContextHub>("/signalr/dashboard");
 
 app.Run();

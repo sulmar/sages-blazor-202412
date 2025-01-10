@@ -1,4 +1,7 @@
 ﻿@page "/dashboard"
+@using Microsoft.AspNetCore.SignalR.Client
+@inject NavigationManager Navigation
+@implements IAsyncDisposable
 
 <h3>Dashboard</h3>
 
@@ -9,16 +12,32 @@
 </div>
 
 @code {
-    private DashboardContext context;
+    private DashboardContext context = new();
 
-    protected override void OnInitialized()
+    private HubConnection connection;
+
+    protected override async Task OnInitializedAsync()
     {
-        context = new DashboardContext
+        var url = Navigation.ToAbsoluteUri("/signalr/dashboard");
+
+        connection = new HubConnectionBuilder()
+            .WithUrl(url)
+            .Build();
+
+
+        connection.On<DashboardContext>("DashboardChanged", dashboardContext =>
         {
-            TotalSales = Random.Shared.Next(1, 100000),
-            NewUsers = Random.Shared.Next(10, 20),
-            ActiveSessions = Random.Shared.Next(10, 50)
-        };
+            context = dashboardContext;
+
+            InvokeAsync(StateHasChanged);
+        });
+
+        await connection.StartAsync();
+
     }
 
+    public async ValueTask DisposeAsync()
+    {
+        await connection.StopAsync();
+    }
 }
