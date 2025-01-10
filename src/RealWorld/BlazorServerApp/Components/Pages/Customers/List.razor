@@ -1,5 +1,8 @@
 ﻿@page "/customers"
+@using Microsoft.AspNetCore.Authorization
+
 @inject ICustomerRepository Repository
+@attribute [Authorize]
 
 
 <h3>Customers</h3>

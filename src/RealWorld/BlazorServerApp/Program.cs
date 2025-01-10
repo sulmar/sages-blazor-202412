@@ -7,6 +7,8 @@ using Infrastructure;
 using Blazored.LocalStorage;
 using BlazorServerApp.Hubs;
 using BlazorServerApp.BackroundServices;
+using System.Security.Principal;
+using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,6 +47,11 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 app.UseAntiforgery();
+
+app.UseAuthentication();
+app.UseAuthorization();
+
+ClaimsPrincipal
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
